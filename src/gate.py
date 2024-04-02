@@ -24,6 +24,7 @@ from src.doubletap import doubletap
 from src.hw6 import experimentTreatments, generateStats
 from src.bins import bins
 from src.eg_rules import rules
+from src.cluster import cluster
 
 def coerce(x):
    try : return ast.literal_eval(x)
@@ -97,6 +98,9 @@ def main():
     bins()
   if config.the.todo == "rule":
     rules()
+  if config.the.todo == "cluster":
+    cluster()
+
 
 if __name__ == "__main__":
   main()
