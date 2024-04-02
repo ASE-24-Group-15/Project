@@ -29,7 +29,7 @@ def vectorMutate(a, b, c):
 
 
 def cluster():
-    t, evals = DATA("../data/auto93.csv").tree(True)
+    t, _ = DATA("../data/auto93.csv").tree(True)
     clusters = t.getClusters()
     mutated_values= []
 
