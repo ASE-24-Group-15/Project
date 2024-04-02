@@ -1,5 +1,6 @@
 from src.data import DATA
 from src.l import l
+import csv
 
 import random
 
@@ -30,29 +31,25 @@ def vectorMutate(a, b, c):
 def cluster():
     t, evals = DATA("../data/auto93.csv").tree(True)
     clusters = t.getClusters()
-    print("evals: ", evals)
-    print("cluster: ", clusters)
+    mutated_values= []
 
     for cluster in clusters:
-        print("Cluster:", cluster.data.cols.names)
-        print( "Centroid:", l().o(cluster.data.mid().cells))
-        print("Rows:", cluster.data.rows)
-        for row in cluster.data.rows:
-            print(row.cells)
-        print("=====================================")
-        for _ in range(len(cluster.data.rows)//3):
-
-            shuffled_rows = list(cluster.data.rows)
+        for a in cluster.data.rows:
+            shuffled_rows = [row for row in cluster.data.rows if row != a]
             random.shuffle(shuffled_rows)
         
-            # Picking three random rows without replacement
-            a, b, c = shuffled_rows[:3]
+            # Picking two random rows without replacement
+            b, c = shuffled_rows[:2]
 
-            print("a:", a.cells)
-            print("b:", b.cells)
-            print("c:", c.cells)
-            print("Mutated:", vectorMutate(a.cells, b.cells, c.cells))
-        
-        print("=====================================")
+            mutated_values.append(vectorMutate(a.cells, b.cells, c.cells))
 
+    # Mutated file name
+    csv_filename = "../mutated_data/mutated_auto93.csv"
+
+    # Write the data to the CSV file
+    with open(csv_filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(t.data.cols.names[0])
+        for row in mutated_values:
+            writer.writerow(row)
 
