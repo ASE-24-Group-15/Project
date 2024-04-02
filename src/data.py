@@ -185,7 +185,9 @@ class DATA:
         def _tree(data, above=None, lefts=None, rights=None, node=None):
             nonlocal evals
             node = NODE(data)
-            if len(data.rows) > 2 * len(self.rows) ** 0.5:
+            # if len(data.rows) > 2 * len(self.rows) ** 0.5:
+            # if len(data.rows) > len(self.rows) ** (1/3):
+            if len(data.rows) > 12 :
                 lefts, rights, node.left, node.right, node.C, node.cut, evals1 = self.half(data.rows, sortp, above)
                 evals += evals1
                 node.lefts = _tree(self.clone(lefts), node.left)
