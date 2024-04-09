@@ -1,6 +1,8 @@
 from src.data import DATA
 from src.l import l
 import csv
+import src.config as config
+import src.typeChecker as typeChecker
 
 import random
 
@@ -29,7 +31,8 @@ def vectorMutate(a, b, c):
 
 
 def cluster():
-    t, _ = DATA("../data/auto93.csv").tree(True)
+    # t, _ = DATA("../data/auto93.csv").tree(True)
+    t, _ = DATA(config.the.file).tree(True)
     clusters = t.getClusters()
     mutated_values= []
 
@@ -44,7 +47,9 @@ def cluster():
             mutated_values.append(vectorMutate(a.cells, b.cells, c.cells))
 
     # Mutated file name
-    csv_filename = "../mutated_data/mutated_auto93.csv"
+    # csv_filename = "../mutated_data/mutated_auto93.csv"
+
+    csv_filename = "../mutated_data/"+config.the.file.split("/")[-1].split(".")[0]+"_mutated.csv"
 
     # Write the data to the CSV file
     with open(csv_filename, mode='w', newline='') as file:
@@ -52,4 +57,6 @@ def cluster():
         writer.writerow(t.data.cols.names[0])
         for row in mutated_values:
             writer.writerow(row)
+    
+    typeChecker.typeChecker(config.the.file, csv_filename)
 
