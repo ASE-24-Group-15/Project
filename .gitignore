@@ -161,4 +161,3 @@ cython_debug/
 .vscode/launch.json
 
 mutated_data/
-Proj_Data/
