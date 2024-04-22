@@ -25,6 +25,8 @@ from src.hw6 import experimentTreatments, generateStats
 from src.bins import bins
 from src.eg_rules import rules
 from src.cluster import cluster
+from src.synthesizer import synthesizer
+from src.classify import classify
 
 def coerce(x):
    try : return ast.literal_eval(x)
@@ -100,6 +102,10 @@ def main():
     rules()
   if config.the.todo == "cluster":
     cluster()
+  if config.the.todo == "synthesizer":
+    synthesizer()
+  if config.the.todo == "classify":
+    classify()
 
 
 if __name__ == "__main__":
