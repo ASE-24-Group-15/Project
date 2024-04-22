@@ -35,7 +35,7 @@ def external(file, folder_path):
         smapeList.append(smape(file, csv_filename))
         privacy_score.append(np.mean(privacy_preservation_score(file, csv_filename)))
         Js.append(js_knn(file, csv_filename))
-        model_metrics = knn(file, csv_filename)
+        model_metrics = list(knn(file, csv_filename))
         knn_accuracy.append(model_metrics[0])
         knn_recall.append(model_metrics[1])
         knn_precision.append(model_metrics[2])
