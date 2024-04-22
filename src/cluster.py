@@ -95,6 +95,6 @@ def cluster(iterations = 1 , iterator = 'n12'):
     print("KL Divergence: ", kl_divergence)
     print("Privacy Score: ", privacy_score)
     print("JSD: ", Js)
-    return bestList, randList, smapeList, kl_divergence, privacy_score, Js
+    return bestList, randList, smapeList, privacy_score, Js
 
 

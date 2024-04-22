@@ -161,3 +161,7 @@ cython_debug/
 .vscode/launch.json
 
 mutated_data/
+src/privacy_score copy.py
+src/privacy_score_approach_2.py
+src/subprocess.py
+src/statistic.py
