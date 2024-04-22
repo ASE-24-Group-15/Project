@@ -78,7 +78,6 @@ def synthesizer():
     DS_incorr_smapeList, DS_incorr_privacy_score, DS_incorr_js_score, DS_incorr_knn_accuracy, DS_incorr_knn_recall, DS_incorr_knn_precision, DS_incorr_knn_f1, DS_incorr_knn_mcc = external(config.the.file, "independent_attribute_mode")
     print("independent_attribute_mode JS avg: ", sum(DS_incorr_js_score)/len(DS_incorr_js_score))
 
-
     print("SMAPE Statistics:")
     eg0([   
             SAMPLE(smapeList_n12, "smapeList_n12"),

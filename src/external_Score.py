@@ -7,16 +7,15 @@ from src.metrics import js_knn
 import src.config as config
 from src.KNN import knn
 
-smapeList = []
-privacy_score = []
-Js = []
-knn_accuracy = []
-knn_recall = []
-knn_precision = []
-knn_f1 = []
-knn_mcc = []
-
 def external(file, folder_path):
+    smapeList = []
+    privacy_score = []
+    Js = []
+    knn_accuracy = []
+    knn_recall = []
+    knn_precision = []
+    knn_f1 = []
+    knn_mcc = []
 
     # Run the process 20 times
     for iteration in range(20):
@@ -33,14 +32,14 @@ def external(file, folder_path):
 
         # Perform the operations
         smapeList.append(smape(file, csv_filename))
-        privacy_score.append(np.mean(privacy_preservation_score(file, csv_filename)))
+        privacy_score.append(-1 * np.mean(privacy_preservation_score(file, csv_filename)))
         Js.append(js_knn(file, csv_filename))
-        model_metrics = list(knn(file, csv_filename))
-        knn_accuracy.append(model_metrics[0])
-        knn_recall.append(model_metrics[1])
-        knn_precision.append(model_metrics[2])
-        knn_f1.append(model_metrics[3])
-        knn_mcc.append(model_metrics[4])
+        model_metrics = knn(file, csv_filename)
+        knn_accuracy.append(-1 * model_metrics[0])
+        knn_recall.append(-1 * model_metrics[1])
+        knn_precision.append(-1 * model_metrics[2])
+        knn_f1.append(-1 * model_metrics[3])
+        knn_mcc.append(-1 * model_metrics[4])
 
         # classify(csv_filename)
     return smapeList, privacy_score, Js, knn_accuracy, knn_recall, knn_precision, knn_f1, knn_mcc

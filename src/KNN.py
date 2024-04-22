@@ -42,5 +42,5 @@ def knn(org_file, mutated):
     
     # Evaluate KNN model
     accuracy_score, recall_score, precision_score, f1_score, mcc = evaluate_knn_model(synthesized_train_data, test_data)
-    
-    return accuracy_score, recall_score, precision_score, f1_score, mcc
+    print(f"Accuracy: {accuracy_score}, Recall: {recall_score}, Precision: {precision_score}, F1 Score: {f1_score}, MCC: {mcc}")
+    return [accuracy_score, recall_score, precision_score, f1_score, mcc]
