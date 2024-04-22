@@ -1,6 +1,7 @@
 import math
 # import sys
 import src.config as config
+import numpy as np
 
 class ROW:
     def __init__(self, t):
@@ -46,11 +47,19 @@ class ROW:
             d = d + abs(col.heaven - col.norm(self.cells[col.at])) ** 2
         return d ** .5 / n ** .5
 
+    def KL(self, data):
+        a = self.cells
+        b = data.cells
+        # return np.sum(np.where(p != 0, p * np.log(p / q), 0))
+        return sum(a[i] * np.log(a[i]/b[i]) for i in range(len(a)))
+
+
     def dist(self, row, data):
         d, n, p = 0, 0, config.the.p
         for col in data.cols.x.values():
             n += 1
             d += col.dist(self.cells[col.at], row.cells[col.at]) ** p
+            # d += col.dist(self.cells[col.iloc[0]], row.cells[col.iloc[0]]) ** p
         return (d ** (1 / p) / n ** (1 / p)) 
 
     def neighbors(self, data, rows=None):
