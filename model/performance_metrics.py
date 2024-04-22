@@ -1,18 +1,16 @@
 import os
 import pandas as pd
-from sklearn.metrics import accuracy_score, precision_score, recall_score, matthews_corrcoef, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, matthews_corrcoef, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from math import sqrt
 
 def calculate_metrics(y_true, y_pred):
     accuracy = accuracy_score(y_true, y_pred)
     precision = precision_score(y_true, y_pred, average='micro')
     recall = recall_score(y_true, y_pred, average='micro')
     mcc = matthews_corrcoef(y_true, y_pred)
-    rmse = sqrt(mean_squared_error(y_true, y_pred))
-    r2 = r2_score(y_true, y_pred)
-    return accuracy, precision, recall, mcc, rmse, r2
+    f1 = f1_score(y_true, y_pred, average='micro')
+    return accuracy, precision, recall, mcc, f1
 
 def train_and_test_knn(original_data, mutated_data, target_column):
     # Read original data
@@ -75,12 +73,11 @@ def main():
         print("Precision:", metrics[1])
         print("Recall:", metrics[2])
         print("MCC:", metrics[3])
-        print("RMSE:", metrics[4])
-        print("R^2:", metrics[5])
+        print("F1 Score:", metrics[4])
         print()
         results.append([mutated_file] + list(metrics))
 
-    df = pd.DataFrame(results, columns=['Mutated Dataset', 'Accuracy', 'Precision', 'Recall', 'MCC', 'RMSE', 'R^2'])
+    df = pd.DataFrame(results, columns=['Mutated Dataset', 'Accuracy', 'Precision', 'Recall', 'MCC', 'F1 Score'])
     df.to_csv('performance_metrics.csv', index=False)
 
 if __name__ == "__main__":
